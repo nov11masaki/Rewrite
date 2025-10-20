@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>和文→簡素化→英訳支援</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>和文英訳 支援アプリ</h1>
+    <p class="subtitle">同一ページで段階的に進めます</p>
+
+    <!-- ステップ1: 日本語入力 -->
+    <section id="stage-input" class="card">
+      <div class="step-header">
+        <span class="step-number">ステップ 1</span>
+        <h2>日本語の文を入力</h2>
+      </div>
+      <textarea id="inputText" placeholder="例: 和文英訳では、日本語の文をまずわかりやすいすなわち訳しやすい文に書き換えて、その後英語に直すことが重要です。"></textarea>
+      <div class="row">
+        <button id="btnSimplify" class="primary">翻訳しやすい日本語に変換</button>
+      </div>
+    </section>
+
+    <!-- ステップ2: 翻訳しやすい日本語の確認 -->
+    <section id="stage-simplified" class="card hidden">
+      <div class="step-header">
+        <span class="step-number">ステップ 2</span>
+        <h2>翻訳しやすい日本語に変換されました</h2>
+      </div>
+      <div class="comparison">
+        <div class="comparison-item">
+          <h3>元の文</h3>
+          <pre id="originalText" class="box original"></pre>
+        </div>
+        <div class="comparison-item">
+          <h3>翻訳しやすい日本語</h3>
+          <pre id="simplifiedText" class="box simplified"></pre>
+        </div>
+      </div>
+      <p class="muted"><span id="score"></span></p>
+      <p class="question">この書き換えでよろしいですか？</p>
+      <div class="row">
+        <button id="btnProceed" class="primary">OK（英訳に進む）</button>
+        <button id="btnRetry" class="secondary">やり直す</button>
+      </div>
+    </section>
+
+    <!-- ステップ3: 英訳入力 -->
+    <section id="stage-learner" class="card hidden">
+      <div class="step-header">
+        <span class="step-number">ステップ 3</span>
+        <h2>英訳にチャレンジ</h2>
+      </div>
+      <div class="reference">
+        <h3>翻訳しやすい日本語（参考）</h3>
+        <pre id="referenceText" class="box simplified"></pre>
+      </div>
+      <h3>あなたの英訳</h3>
+      <textarea id="learnerText" placeholder="まずは自分で英訳してみてください。難しければ「AIで補助」ボタンを使えます。"></textarea>
+      <div class="row">
+        <button id="btnAssist" class="assist">AIで補助</button>
+        <button id="btnSubmit" class="primary">完了</button>
+        <button id="btnBackSimplified" class="secondary">戻る</button>
+      </div>
+      <div id="assistResult" class="box hidden assist-box"></div>
+    </section>
+
+    <!-- ステップ4: 最終確認 -->
+    <section id="stage-final" class="card hidden">
+      <div class="step-header">
+        <span class="step-number">ステップ 4</span>
+        <h2>最終確認</h2>
+      </div>
+      <div class="final-comparison">
+        <div>
+          <h3>元の日本語</h3>
+          <pre id="finalOriginal" class="box original"></pre>
+        </div>
+        <div>
+          <h3>翻訳しやすい日本語</h3>
+          <pre id="finalSimplified" class="box simplified"></pre>
+        </div>
+        <div>
+          <h3>あなたの英訳</h3>
+          <pre id="finalLearner" class="box learner"></pre>
+        </div>
+        <div>
+          <h3>AIの提案</h3>
+          <pre id="finalAI" class="box ai"></pre>
+        </div>
+      </div>
+      <div class="row">
+        <button id="btnRestart" class="primary">別の文を試す</button>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="/static/main.js"></script>
+</body>
+</html>
