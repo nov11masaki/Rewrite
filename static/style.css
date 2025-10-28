@@ -3,14 +3,48 @@ body{font-family: -apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN','
 .container{max-width:900px;margin:0 auto}
 h1{font-size:26px;margin-bottom:4px}
 .subtitle{color:#6b7280;font-size:14px;margin-bottom:20px}
+.page-section{min-height:400px}
 .card{background:var(--card);padding:20px;margin-bottom:16px;border-radius:10px;box-shadow:0 2px 4px rgba(11,37,69,0.08);transition:all 0.3s}
 .card:not(.hidden){animation:fadeIn 0.4s}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .hidden{display:none}
 .step-header{margin-bottom:16px}
 .step-number{display:inline-block;background:#e0e7ff;color:#3730a3;padding:4px 10px;border-radius:4px;font-size:12px;font-weight:600;margin-bottom:8px}
+.info-box{background:#dbeafe;border-left:4px solid var(--accent);padding:12px;margin-bottom:16px;border-radius:6px}
+.info-box p{margin:0;font-size:14px;color:#1e3a8a}
+.evaluation-box{background:#f0fdf4;border-left:4px solid var(--success);padding:12px;margin:16px 0;border-radius:6px}
+.evaluation-box h4{margin:0 0 8px 0;color:#166534;font-size:14px}
+.ai-comment{margin-top:8px;padding:8px;background:#fff;border-radius:4px;font-size:13px;line-height:1.6;display:none}
+#translationScore{font-weight:600;color:#059669;margin-bottom:4px}
+.original-box{margin-bottom:16px}
+.loading{text-align:center;padding:16px;font-size:16px;color:var(--accent);display:flex;align-items:center;justify-content:center;gap:8px}
+.spinner{animation:spin 1s linear infinite}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 h2{font-size:18px;margin:8px 0}
 h3{font-size:15px;margin:12px 0 8px;color:#374151}
+
+/* Temperature control styles */
+.setting-box{background:#f9fafb;border:1px solid #e5e7eb;padding:16px;border-radius:8px;margin:16px 0}
+.setting-box h3{margin-top:0;font-size:14px;color:#374151}
+.temperature-control{display:flex;flex-direction:column;gap:8px}
+.temperature-control label{font-size:13px;font-weight:600;color:#111827}
+#temperatureSlider{width:100%;height:6px;border-radius:3px;background:#e5e7eb;outline:none;-webkit-appearance:none;appearance:none}
+#temperatureSlider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;background:var(--primary);cursor:pointer;box-shadow:0 2px 4px rgba(0,0,0,0.2)}
+#temperatureSlider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--primary);cursor:pointer;border:0;box-shadow:0 2px 4px rgba(0,0,0,0.2)}
+.temperature-marks{display:flex;justify-content:space-between;font-size:11px;color:#6b7280;margin-top:4px}
+.temperature-marks span{text-align:center}
+.temperature-marks small{display:block;font-weight:600;color:#374151;margin-top:2px}
+.temperature-description{font-size:12px;color:#6b7280;line-height:1.5;margin:8px 0 0;padding:8px;background:#fff;border-radius:4px;border-left:3px solid var(--primary)}
+
+/* Candidate selection styles */
+#candidatesList{display:flex;flex-direction:column;gap:12px;margin:12px 0}
+.candidate-card{display:flex;align-items:start;gap:12px;padding:14px;border:2px solid #e5e7eb;border-radius:8px;cursor:pointer;transition:all 0.2s;background:#fafafa}
+.candidate-card:hover{border-color:var(--accent);background:#f0f9ff}
+.candidate-card.selected{border-color:var(--primary);background:#ecfdf5;box-shadow:0 0 0 3px rgba(44,122,123,0.1)}
+.candidate-card input[type="radio"]{margin-top:4px;cursor:pointer;accent-color:var(--primary)}
+.candidate-text{font-size:14px;line-height:1.6;color:#111827;font-weight:500;margin-bottom:6px}
+.candidate-explanation{font-size:12px;color:#6b7280;line-height:1.5}
+
 textarea{width:100%;min-height:100px;padding:12px;border-radius:6px;border:1px solid #dfe6ef;font-size:14px;font-family:inherit;resize:vertical}
 textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(43,108,176,0.1)}
 pre.box{padding:12px;border-radius:6px;white-space:pre-wrap;font-size:13px;line-height:1.6;margin:8px 0}
