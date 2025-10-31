@@ -52,27 +52,76 @@ python3 app.py
 
 5. ブラウザで開く
 
-http://127.0.0.1:5000/
+http://127.0.0.1:5001/
+
+## Renderへのデプロイ
+
+### デプロイ前の準備
+
+1. **このリポジトリをGitHubにプッシュ** （既に完了）
+
+2. **Renderの準備**
+   - [Render.com](https://render.com) にアカウント作成
+   - GitHubアカウントと連携
+
+3. **新しいWebサービスを作成**
+   - ダッシュボード → "New +" → "Web Service"
+   - GitHubリポジトリを接続：`nov11masaki/Rewrite`
+   - 以下の設定を入力：
+
+   | 設定項目 | 値 |
+   |---------|-----|
+   | Name | rewrite-app (任意) |
+   | Environment | Python 3 |
+   | Build Command | `pip install -r requirements.txt` |
+   | Start Command | `gunicorn app:app` |
+
+4. **環境変数を設定**
+   - Environment Variables に以下を追加：
+     ```
+     OPENAI_API_KEY = your_openai_api_key
+     FLASK_ENV = production
+     ```
+   - [OpenAI Platform](https://platform.openai.com/api-keys) でキーを取得
+
+5. **デプロイ開始**
+   - "Create Web Service" をクリック
+   - ビルドとデプロイが自動で開始
+   - 数分後、提供されたURLでアクセス可能
+
+### デプロイ後
+
+- 自動更新：GitHubの `main` ブランチにプッシュすると自動的に再デプロイされます
+- ログ確認：Renderダッシュボードの "Logs" タブで確認可能
+
 
 ## 構成
 - `app.py`: Flaskバックエンド（OpenAI API統合、GPT-4o mini使用）
 - `templates/index.html`: シングルページUI（段階的に進行）
 - `static/style.css`, `static/main.js`: フロントエンドのスタイルと動作
+- `Procfile`: Render/Heroku用の起動設定
+- `render.yaml`: Render用の詳細設定
+- `requirements.txt`: Python依存関係
 
 ## 機能
 - ✅ 同一ページで段階的に進むUI制御
-- ✅ **学習者が翻訳しやすい日本語に書き換え → AIが評価**
-- ✅ **学習者が英訳を作成 → AIが英訳を評価**
+- ✅ **AIが複数の書き換え候補を生成** → 学習者が最適なものを選択
+- ✅ **Temperatureスライダー** で創造性レベルを調整
+- ✅ **慣用句・ことわざを平易な日本語に自動変換**
+- ✅ 複数文の入力に対応
+- ✅ 学習者が英訳を作成 → AIが英訳を評価
 - ✅ AIによるスコア評価と詳細フィードバック
-- ✅ 簡素化→確認→英訳→評価の順で進む
 - ✅ OpenAI GPT-4o miniによる高品質な評価
 - ✅ APIキーがない場合のフォールバック機能
+- ✅ Render/Herokuでのデプロイに対応
 
 ## 技術スタック
 - **バックエンド**: Flask (Python)
 - **フロントエンド**: HTML, CSS, JavaScript
 - **AI**: OpenAI API (GPT-4o mini)
 - **環境変数管理**: python-dotenv
+- **プロダクション**: Gunicorn
+- **デプロイ**: Render.com
 
 ## 貢献
 プルリクエストを歓迎します！

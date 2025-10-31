@@ -350,4 +350,6 @@ def translate_heuristic(text):
     return ' '.join(translated_clauses)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    port = int(os.getenv('PORT', 5001))
+    debug = os.getenv('FLASK_ENV') == 'development'
+    app.run(debug=debug, host='0.0.0.0', port=port)
